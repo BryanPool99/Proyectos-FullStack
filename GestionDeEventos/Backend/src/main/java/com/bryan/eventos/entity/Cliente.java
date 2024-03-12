@@ -21,10 +21,5 @@ public class Cliente {
     @Column(unique = true)
     private String correo;
     private String direccion;
-    /*
-    @OneToMany(targetEntity = Facturacion.class, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Facturacion> facturaciones;
-     */
 
 }
