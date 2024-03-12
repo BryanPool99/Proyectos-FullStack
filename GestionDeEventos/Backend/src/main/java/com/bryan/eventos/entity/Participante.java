@@ -17,6 +17,7 @@ import java.util.List;
 public class Participante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_participante")
     private Long id;
     private String nombre;
     private String apellido;
@@ -25,8 +26,8 @@ public class Participante {
     private String telefono;
     @ManyToMany(targetEntity = Evento.class, fetch = FetchType.LAZY)
     @JoinTable(name = "detalle_participante",
-            joinColumns = @JoinColumn(name = "participante_id"),
-            inverseJoinColumns = @JoinColumn(name = "evento_id"))
+            joinColumns = @JoinColumn(name = "id_participante"),
+            inverseJoinColumns = @JoinColumn(name = "id_evento"))
     @JsonIgnore
     private List<Evento> eventos;
 }

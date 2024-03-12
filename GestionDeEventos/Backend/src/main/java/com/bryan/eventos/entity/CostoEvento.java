@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,8 +21,6 @@ public class CostoEvento {
     private Long id;
     private String descripcion;
     private Double precio;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "facturacion_id")
-    @JsonIgnore
-    private Facturacion facturacion;
+    @OneToMany(mappedBy = "costoEvento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Facturacion> facturaciones;
 }

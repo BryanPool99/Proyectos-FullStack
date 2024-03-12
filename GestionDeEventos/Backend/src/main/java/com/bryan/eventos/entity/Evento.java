@@ -18,6 +18,7 @@ import java.util.List;
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_evento")
     private Long id;
     private String titulo;
     @Column(name = "fecha_inicio",columnDefinition = "DATETIME")
@@ -32,15 +33,17 @@ public class Evento {
     private String poster;
     @ManyToOne(targetEntity = Usuario.class, fetch = FetchType.EAGER)
     @JsonIgnore
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
     @ManyToMany(targetEntity = Participante.class, fetch = FetchType.LAZY)
     @JoinTable(name = "detalle_participante",
-            joinColumns = @JoinColumn(name = "evento_id"),
-            inverseJoinColumns = @JoinColumn(name = "participante_id"))
+            joinColumns = @JoinColumn(name = "id_evento"),
+            inverseJoinColumns = @JoinColumn(name = "id_participante"))
     @JsonIgnore
     private List<Participante> participantes;
-    @OneToMany(targetEntity = Repositorio.class, fetch = FetchType.LAZY, mappedBy = "evento")
+    @ManyToOne(targetEntity = Repositorio.class, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Repositorio> repositorios;
+    @JoinColumn(name = "id_repositorio")
+    private Repositorio repositorio;
 
 }

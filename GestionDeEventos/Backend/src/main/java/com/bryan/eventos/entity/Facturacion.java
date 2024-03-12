@@ -18,18 +18,23 @@ import java.util.List;
 public class Facturacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_facturacion")
     private Long id;
     @Column(columnDefinition = "DATETIME")
     private LocalDateTime fecha;
     @ManyToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
     @JsonIgnore
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    @OneToMany(targetEntity = CostoEvento.class, fetch = FetchType.LAZY,mappedBy = "facturacion")
-    private List<CostoEvento> costoEventos;
+    @ManyToOne
+    @JoinColumn(name = "id_costo")
+    private CostoEvento costoEvento;
     @OneToOne(targetEntity = Evento.class,cascade = CascadeType.PERSIST)
     @JsonIgnore
+    @JoinColumn(name = "id_evento")
     private  Evento evento;
     @OneToOne(targetEntity = EventoPredefinido.class,cascade = CascadeType.PERSIST)
     @JsonIgnore
+    @JoinColumn(name = "id_predefinido")
     private  EventoPredefinido eventoPredefinido;
 }

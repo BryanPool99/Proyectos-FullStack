@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,14 +18,13 @@ import java.time.LocalDate;
 public class Repositorio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_repositorio")
     private Long id;
     private String video;
     private String descripcion;
     private String archivos;
     @Column(columnDefinition = "DATE")
     private LocalDate fecha;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "evento_id")
-    @JsonIgnore
-    private Evento evento;
+    @OneToMany(mappedBy = "repositorio", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Evento> eventos;
 }
