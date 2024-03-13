@@ -1,8 +1,6 @@
 package com.bryan.eventos.controller;
 
-import com.bryan.eventos.controller.dto.ClienteDTO;
 import com.bryan.eventos.controller.dto.UsuarioDTO;
-import com.bryan.eventos.entity.Cliente;
 import com.bryan.eventos.entity.Usuario;
 import com.bryan.eventos.service.IUsuarioService;
 import org.modelmapper.ModelMapper;
