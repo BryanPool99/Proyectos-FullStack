@@ -22,4 +22,8 @@ public class Usuario {
     private String nombre;
     private String apellidos;
     private String clave;
+    // New constructor to handle ID deserialization from JSON
+    public Usuario(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }
