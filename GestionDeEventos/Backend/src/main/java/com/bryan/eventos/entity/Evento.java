@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class Evento {
     @Column(name = "id_evento")
     private Long id;
     private String titulo;
-    @Column(name = "fecha_inicio",columnDefinition = "DATETIME")
-    private LocalDateTime fechaInicio;
-    @Column(name = "fecha_fin",columnDefinition = "DATETIME")
-    private LocalDateTime fechaFin;
+    @Column(name = "fecha_inicio",columnDefinition = "DATE")
+    private LocalDate fechaInicio;
+    @Column(name = "fecha_fin",columnDefinition = "DATE")
+    private LocalDate fechaFin;
     @Column(name = "hora_inicio",columnDefinition = "DATETIME")
     private LocalDateTime horaInicio;
     @Column(name = "hora_fin",columnDefinition = "DATETIME")
@@ -41,7 +42,7 @@ public class Evento {
             inverseJoinColumns = @JoinColumn(name = "id_participante"))
     @JsonIgnore
     private List<Participante> participantes;
-    @ManyToOne(targetEntity = Repositorio.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Repositorio.class, fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinColumn(name = "id_repositorio")
     private Repositorio repositorio;
