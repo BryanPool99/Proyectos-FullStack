@@ -21,6 +21,7 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String apellidos;
+    @JsonIgnore
     private String clave;
     // New constructor to handle ID deserialization from JSON
     public Usuario(int id) {
