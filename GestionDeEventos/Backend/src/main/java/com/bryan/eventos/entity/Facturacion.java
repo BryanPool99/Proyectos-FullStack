@@ -7,8 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -20,8 +19,8 @@ public class Facturacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_facturacion")
     private Long id;
-    @Column(columnDefinition = "DATETIME")
-    private LocalDateTime fecha;
+    @Column(columnDefinition = "DATE")
+    private LocalDate fecha;
     @ManyToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinColumn(name = "id_cliente")
@@ -29,12 +28,16 @@ public class Facturacion {
     @ManyToOne
     @JoinColumn(name = "id_costo")
     private CostoEvento costoEvento;
-    @OneToOne(targetEntity = Evento.class,cascade = CascadeType.PERSIST)
+    @OneToOne(targetEntity = Evento.class)
     @JsonIgnore
     @JoinColumn(name = "id_evento")
     private  Evento evento;
-    @OneToOne(targetEntity = EventoPredefinido.class,cascade = CascadeType.PERSIST)
+    @OneToOne(targetEntity = EventoPredefinido.class)
     @JsonIgnore
     @JoinColumn(name = "id_predefinido")
     private  EventoPredefinido eventoPredefinido;
+    // New constructor to handle ID deserialization from JSON
+    public Facturacion(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }

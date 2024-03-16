@@ -46,5 +46,8 @@ public class Evento {
     @JsonIgnore
     @JoinColumn(name = "id_repositorio")
     private Repositorio repositorio;
-
+    // New constructor to handle ID deserialization from JSON
+    public Evento(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }

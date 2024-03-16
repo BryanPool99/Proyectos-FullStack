@@ -22,5 +22,10 @@ public class CostoEvento {
     private String descripcion;
     private Double precio;
     @OneToMany(mappedBy = "costoEvento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Facturacion> facturaciones;
+    // New constructor to handle ID deserialization from JSON
+    public CostoEvento(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }

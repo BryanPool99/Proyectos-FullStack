@@ -30,4 +30,8 @@ public class EventoPredefinido {
     @ManyToOne(targetEntity = Usuario.class)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+    // New constructor to handle ID deserialization from JSON
+    public EventoPredefinido(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }

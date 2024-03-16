@@ -22,5 +22,8 @@ public class Cliente {
     @Column(unique = true)
     private String correo;
     private String direccion;
-
+    // New constructor to handle ID deserialization from JSON
+    public Cliente(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }

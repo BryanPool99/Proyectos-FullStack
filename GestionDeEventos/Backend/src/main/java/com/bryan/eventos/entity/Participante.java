@@ -30,4 +30,8 @@ public class Participante {
             inverseJoinColumns = @JoinColumn(name = "id_evento"))
     @JsonIgnore
     private List<Evento> eventos;
+    // New constructor to handle ID deserialization from JSON
+    public Participante(int id) {
+        this.id = (long) id; // Cast to Long for compatibility with the field type
+    }
 }
